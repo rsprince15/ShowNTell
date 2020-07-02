@@ -1,0 +1,22 @@
+<div class="buttons" id="callDiv" #callDiv>
+    <button id="cameraBtn" (click)="myFunc()">
+        <span id="call_label">Call Russ!</span>
+        <svg class="svg-container">
+           <image class="videoIcon" xlink:href="assets/icons/video-conference.svg"/>        
+        </svg>
+    </button>
+</div>
+
+<!-- <div id="aws_input">
+    <input type="text" id="fname" name="fname" value="Enter Text...">
+    <button class="mdc-button mdc-button--raised" disabled id="send">
+        <span id="sendLabel">Send</span>
+    </button>
+</div> -->
+<div id="videoDiv" #videoDiv>
+    <video id="localVideo" #localVideo muted autoplay playsinline></video>
+    <video id="remoteVideo" autoplay playsinline></video>
+</div>
+<!-- <button class="mdc-button mdc-button--raised" disabled id="hangupBtn"> -->
+      <!-- <span id="bye">Bye Russ!</span> -->
+<!-- </button> -->

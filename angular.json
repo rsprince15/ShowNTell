@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/my-app",
+            "outputPath": "dist/showntell",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -27,7 +27,7 @@
               "src/styles.css"
             ],
             "scripts": [
-              "src/app.js"
+              "src/assets/app.js"
             ]
           },
           "configurations": {
@@ -122,5 +122,5 @@
         }
       }
     }},
-  "defaultProject": "my-app"
+  "defaultProject": "showntell"
 }
