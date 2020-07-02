@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Show N' Tell</title>
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/7.13.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/7.13.1/firebase-firestore.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ultra">
+    <link rel="stylesheet" type="text/css" href="assets/main.css"/>
+</head>
+
+<body>
+
+<div class="buttons", id="callDiv">
+    <button class="mdc-button mdc-button--raised" id="cameraBtn">
+        <span id="call_label">Call Russ!</span>
+        <svg class="svg-container">
+           <image class="videoIcon" xlink:href="assets/icons/video-conference.svg"/>        
+        </svg>
+    </button>
+</div>
+
+<div id="chat">
+
+    <div id="aws_input">
+        <input type="text" id="fname" name="fname" value="Enter Text...">
+        <button class="mdc-button mdc-button--raised" disabled id="send">
+            <span id="sendLabel">Send</span>
+        </button>
+    </div>
+    <div id="videos">
+        <video id="localVideo" muted autoplay playsinline></video>
+        <video id="remoteVideo" autoplay playsinline></video>
+    </div>
+    
+    <button class="mdc-button mdc-button--raised" disabled id="hangupBtn">
+        <span id="bye">Bye Russ!</span>
+    </button>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
