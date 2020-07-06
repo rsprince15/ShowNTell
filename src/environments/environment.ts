@@ -3,8 +3,18 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyAFkgRZW2s1q-a5dbZw0YuERb9MVXgZy_0",
+    authDomain: "delvedemo.firebaseapp.com",
+    databaseURL: "https://delvedemo.firebaseio.com",
+    projectId: "delvedemo",
+    storageBucket: "delvedemo.appspot.com",
+    messagingSenderId: "995032785453",
+    appId: "1:995032785453:web:ff8202af90d208b4e60ea4",
+    measurementId: "G-YTCWBG28GT"  }
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file
