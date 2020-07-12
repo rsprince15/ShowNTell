@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "delvedemo": {
+      "hosting": {
+        "showntell": [
+          "delvedemo"
+        ]
+      }
+    }
+  }
+}

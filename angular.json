@@ -119,8 +119,13 @@
               "devServerTarget": "showntell:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "showntell"
 }

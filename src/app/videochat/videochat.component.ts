@@ -79,9 +79,9 @@ export class VideochatComponent implements OnInit {
   
     this.registerPeerConnectionListeners();
   
-    localStream.getTracks().forEach(track => {
-      peerConnection.addTrack(track, localStream);
-    });
+    // localStream.getTracks().forEach(track => {
+    //   peerConnection.addTrack(track, localStream);
+    // });
 
     // Code for collecting ICE candidates below
     const callerCandidatesCollection = roomRef.collection('callerCandidates');
@@ -155,9 +155,11 @@ export class VideochatComponent implements OnInit {
     console.log('Create PeerConnection with configuration: ', configuration);
     peerConnection = new RTCPeerConnection(configuration);
     this.registerPeerConnectionListeners();
-    localStream.getTracks().forEach(track => {
-      peerConnection.addTrack(track, localStream);
-    });
+ 
+    // localStream.getTracks().forEach(track => {
+    //   peerConnection.addTrack(track, localStream);
+    // });
+ 
     // Code for collecting ICE candidates below
     const calleeCandidatesCollection = roomRef.collection('calleeCandidates');
     peerConnection.addEventListener('icecandidate', event => {
@@ -169,7 +171,6 @@ export class VideochatComponent implements OnInit {
       calleeCandidatesCollection.add(event.candidate.toJSON());
     });
 
-    // Code for collecting ICE candidates above
     peerConnection.addEventListener('track', event => {
       console.log('Got remote track:', event.streams[0]);
       event.streams[0].getTracks().forEach(track => {
@@ -179,19 +180,23 @@ export class VideochatComponent implements OnInit {
     });
 
     // Code for creating SDP answer below
-    const offer = roomSnapshot.data().offer;
-    console.log('Got offer:', offer);
-    await peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
-    const answer = await peerConnection.createAnswer();
-    console.log('Created answer:', answer);
-    await peerConnection.setLocalDescription(answer);
-    const roomWithAnswer = {
-      answer: {
-        type: answer.type,
-        sdp: answer.sdp,
-      },
-    };
-    await roomRef.update(roomWithAnswer);
+    roomRef.snapshotChanges().pipe(
+      map(async snapshot => {
+        console.log("creating Answer");
+        let offer = snapshot.payload.data();
+        await peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
+        const answer = await peerConnection.createAnswer();
+        console.log('Created answer:', answer);
+        await peerConnection.setLocalDescription(answer);
+        const roomWithAnswer = {
+          answer: {
+            type: answer.type,
+            sdp: answer.sdp,
+          },
+        };
+        await roomRef.update(roomWithAnswer);
+      })
+    );
 
     // Listening for remote ICE candidates below
     roomRef.collection('callerCandidates').snapshotChanges().pipe(
@@ -229,20 +234,18 @@ export class VideochatComponent implements OnInit {
 
     // Figure out if Russell is connected
     this.offer.subscribe(x => {
-      x.map(i => {
-
-          var stringifiedData = JSON.stringify(i);
+          var stringifiedData = JSON.stringify(x);
           var parsedData = JSON.parse(stringifiedData);
 
-          if (parsedData.offer.russ)
+          if (parsedData.russ)
           {
             console.log("Joining Room");
-            this.joinRoomById();
+            // this.joinRoomById();
           } else {
             console.log("Creating Room");
             this.createRoom();
           }
       });
-    });
+    // });
   }
 }
